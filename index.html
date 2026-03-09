@@ -535,11 +535,10 @@
     </div>
     <div class="terminal-body">
       <div class="t-comment" data-i18n="terminal.comment1"># Stiahni a spusti</div>
-      <div class="t-cmd">git clone https://github.com/<br>&nbsp;&nbsp;open-resiapp/open-resiapp</div>
-      <div class="t-cmd">cd open-resiapp</div>
-      <div class="t-cmd">cp .env.example .env</div>
+      <div class="t-cmd">curl -O https://raw.githubusercontent.com/<br>&nbsp;&nbsp;open-resiapp/open-resiapp/main/<br>&nbsp;&nbsp;docker-compose.hub.yml</div>
+      <div class="t-cmd">cp .env.production.example .env</div>
       <div class="t-comment" data-i18n="terminal.comment2"># Uprav .env &ndash; n&aacute;zov bytovky,<br># heslo k DB, email</div>
-      <div class="t-cmd">docker compose up -d</div>
+      <div class="t-cmd">docker compose -f docker-compose.hub.yml up -d</div>
       <br />
       <div class="t-success" data-i18n="terminal.s1">&check; Datab&aacute;za pripraven&aacute;</div>
       <div class="t-success" data-i18n="terminal.s2">&check; Migr&aacute;cie hotov&eacute;</div>
@@ -751,16 +750,18 @@
         </div>
 
         <h3 id="doc-install" data-i18n="doc.install.title">In&scaron;tal&aacute;cia</h3>
-        <h4 data-i18n="doc.install.step1">1. Stiahni repozit&aacute;r</h4>
-        <pre><code>git clone https://github.com/open-resiapp/open-resiapp.git
-cd open-resiapp</code></pre>
+        <h4 data-i18n="doc.install.step1">1. Stiahni s&uacute;bory</h4>
+        <pre><code>mkdir open-resiapp && cd open-resiapp
+curl -O https://raw.githubusercontent.com/open-resiapp/open-resiapp/main/docker-compose.hub.yml
+curl -O https://raw.githubusercontent.com/open-resiapp/open-resiapp/main/.env.production.example</code></pre>
 
         <h4 data-i18n="doc.install.step2">2. Vytvor konfigura&ccaron;n&yacute; s&uacute;bor</h4>
-        <pre><code>cp .env.example .env</code></pre>
+        <pre><code>cp .env.production.example .env
+nano .env</code></pre>
 
         <h4 data-i18n="doc.install.step3">3. Spusti Docker stack</h4>
-        <pre><code>docker compose up -d</code></pre>
-        <p data-i18n="doc.install.note">Toto stiahne potrebn&eacute; Docker images, vytvor&iacute; datab&aacute;zu a spust&iacute; app. Prv&eacute; spustenie trv&aacute; 1&ndash;2 min&uacute;ty.</p>
+        <pre><code>docker compose -f docker-compose.hub.yml up -d</code></pre>
+        <p data-i18n="doc.install.note">Toto stiahne Docker images z Docker Hub, vytvor&iacute; datab&aacute;zu a spust&iacute; app. Migr&aacute;cie sa spustia automaticky. Prv&eacute; spustenie trv&aacute; 1&ndash;2 min&uacute;ty.</p>
 
         <h3 id="doc-env" data-i18n="doc.env.title">Konfigur&aacute;cia .env</h3>
         <p data-i18n="doc.env.intro">Otvor s&uacute;bor <code>.env</code> a uprav nasledovn&eacute; hodnoty:</p>
@@ -791,13 +792,13 @@ EMAIL_FROM=noreply@mojabytovka.sk</span></code></pre>
 
         <h3 id="doc-first-run" data-i18n="doc.first.title">Prv&eacute; spustenie</h3>
         <p data-i18n="doc.first.intro">Po spusten&iacute; overte, &zcaron;e v&scaron;etko be&zcaron;&iacute;:</p>
-        <pre><code>docker compose ps</code></pre>
+        <pre><code>docker compose -f docker-compose.hub.yml ps</code></pre>
         <p data-i18n="doc.first.check">V&scaron;etky tri slu&zcaron;by (<code>app</code>, <code>db</code>, <code>caddy</code>) musia ma&#357; status <code>Up</code>.</p>
         <p data-i18n="doc.first.open">Otvor prehliada&ccaron; na <code>http://localhost:3000</code> &ndash; uvid&iacute;&scaron; prihlasovac&iacute; formul&aacute;r.</p>
 
         <h4 data-i18n="doc.first.seed.title">Seed d&aacute;ta pre testovanie</h4>
         <p data-i18n="doc.first.seed.intro">Pre r&yacute;chle otestovanie m&ocirc;&zcaron;e&scaron; na&ccaron;&iacute;ta&#357; uk&aacute;&zcaron;kov&eacute; d&aacute;ta:</p>
-        <pre><code>docker compose exec app npm run db:seed</code></pre>
+        <pre><code>docker compose -f docker-compose.hub.yml exec app npm run db:seed</code></pre>
         <p data-i18n="doc.first.seed.desc">Toto vytvor&iacute; testovac&iacute;ch vlastn&iacute;kov, byty a jedno akt&iacute;vne hlasovanie. Prihlasovacie &uacute;daje admina:</p>
         <pre><code>Email:  admin@test.sk
 Heslo:  Admin123!</code></pre>
@@ -822,36 +823,55 @@ APP_DOMAIN=bytovka.mojadomena.sk</code></pre>
         </div>
 
         <p data-i18n="doc.https.restart">Po nastaven&iacute; dom&eacute;ny re&scaron;tartuj stack:</p>
-        <pre><code>docker compose down
-docker compose up -d</code></pre>
+        <pre><code>docker compose -f docker-compose.hub.yml down
+docker compose -f docker-compose.hub.yml up -d</code></pre>
 
         <h3 id="doc-backup" data-i18n="doc.backup.title">Z&aacute;lohovanie</h3>
         <p data-i18n="doc.backup.intro">V&scaron;etky d&aacute;ta s&uacute; v PostgreSQL datab&aacute;ze a v prie&ccaron;inku <code>uploads/</code>. Odpor&uacute;&ccaron;ame z&aacute;lohova&#357; denne.</p>
 
-        <h4 data-i18n="doc.backup.manual">Manu&aacute;lna z&aacute;loha datab&aacute;zy</h4>
-        <pre><code>docker compose exec db pg_dump -U postgres resiapp \
-  > backup_$(date +%Y%m%d).sql</code></pre>
+        <h4 data-i18n="doc.backup.auto">Automatick&aacute; z&aacute;loha</h4>
+        <pre><code># Stiahni z&aacute;lohovac&iacute; skript
+curl -O https://raw.githubusercontent.com/open-resiapp/open-resiapp/main/scripts/backup.sh
+chmod +x backup.sh
 
-        <h4 data-i18n="doc.backup.cron">Automatick&aacute; z&aacute;loha (cron)</h4>
-        <pre><code># Pridaj do crontab (crontab -e):
-0 3 * * * cd /opt/open-resiapp && \
-  docker compose exec -T db pg_dump -U postgres resiapp \
-  > backups/backup_$(date +\%Y\%m\%d).sql</code></pre>
+# Otestuj
+./backup.sh
+
+# Pridaj do cronu (denne o 3:00)
+(crontab -l 2>/dev/null; echo "0 3 * * * cd $(pwd) && ./backup.sh >> /var/log/resiapp-backup.log 2>&1") | crontab -</code></pre>
+
+        <h4 data-i18n="doc.backup.remote">Vzdialen&aacute; z&aacute;loha (voliteln&eacute;)</h4>
+        <p data-i18n="doc.backup.remote.desc">Pre z&aacute;lohy mimo servera (ochrana aj pri kompromitovan&iacute; servera):</p>
+        <pre><code># Hetzner Storage Box (BorgBackup)
+curl -O https://raw.githubusercontent.com/open-resiapp/open-resiapp/main/scripts/backup-hetzner-setup.sh
+
+# AWS S3 (Restic)
+curl -O https://raw.githubusercontent.com/open-resiapp/open-resiapp/main/scripts/backup-aws-setup.sh
+
+# Azure Blob Storage (Restic)
+curl -O https://raw.githubusercontent.com/open-resiapp/open-resiapp/main/scripts/backup-azure-setup.sh</code></pre>
+
+        <h4 data-i18n="doc.backup.restore">Obnova zo z&aacute;lohy</h4>
+        <pre><code>curl -O https://raw.githubusercontent.com/open-resiapp/open-resiapp/main/scripts/restore.sh
+chmod +x restore.sh
+
+# Z lok&aacute;lnej z&aacute;lohy
+./restore.sh /backups/resiapp/daily/db_2026-03-09.sql.gz
+
+# Zo vzdialenej z&aacute;lohy
+./restore.sh list            # zobraz arch&iacute;vy
+./restore.sh borg latest     # obnov z Hetzner
+./restore.sh restic latest   # obnov z AWS/Azure</code></pre>
 
         <div class="callout callout-tip">
-          <span data-i18n="doc.backup.tip">&#x1F4A1; Z&aacute;lohy ukladaj aj mimo servera &ndash; napr&iacute;klad na Backblaze B2 alebo Hetzner Storage Box.</span>
+          <span data-i18n="doc.backup.tip">&#x1F4A1; Vzdialen&eacute; z&aacute;lohy s append-only m&oacute;dom zaru&ccaron;ia, &zcaron;e &uacute;to&ccaron;n&iacute;k nem&ocirc;&zcaron;e zmaza&#357; z&aacute;lohy ani s root pr&iacute;stupom na server.</span>
         </div>
 
         <h3 id="doc-update" data-i18n="doc.update.title">Aktualiz&aacute;cia na nov&uacute; verziu</h3>
-        <p data-i18n="doc.update.desc">Aktualiz&aacute;cia je jednoduch&aacute; &ndash; nov&eacute; migr&aacute;cie sa spustia automaticky po&ccaron;as buildu.</p>
-        <pre><code># 1. Stiahni zmeny
-git pull origin main
-
-# 2. Stiahni nov&eacute; Docker images
-docker compose pull
-
-# 3. Re&scaron;tartuj (downtime ~10 sek&uacute;nd)
-docker compose up -d</code></pre>
+        <p data-i18n="doc.update.desc">Aktualiz&aacute;cia je jednoduch&aacute; &ndash; nov&eacute; migr&aacute;cie sa spustia automaticky pri &scaron;tarte.</p>
+        <pre><code>docker compose -f docker-compose.hub.yml pull
+docker compose -f docker-compose.hub.yml up -d</code></pre>
+        <p data-i18n="doc.update.note">Toto stiahne najnov&scaron;&iacute; Docker image a re&scaron;tartuje app. Migr&aacute;cie datab&aacute;zy sa spustia automaticky &ndash; &zcaron;iadne manu&aacute;lne kroky.</p>
 
         <div class="callout callout-warn">
           <span data-i18n="doc.update.warn">&x26A0;&#xFE0F; Pred ka&zcaron;dou aktualiz&aacute;ciou urob z&aacute;lohu datab&aacute;zy.</span>
@@ -859,9 +879,10 @@ docker compose up -d</code></pre>
 
         <h3 id="doc-admin" data-i18n="doc.admin.title">Admin &uacute;&ccaron;et</h3>
         <p data-i18n="doc.admin.desc">Pri prvom spusten&iacute; v produkcii vytvor admin &uacute;&ccaron;et cez pr&iacute;kazov&yacute; riadok:</p>
-        <pre><code>docker compose exec app npm run create-admin \
-  -- --email predseda@bytovka.sk \
-  -- --name "J&aacute;n Nov&aacute;k"</code></pre>
+        <pre><code>docker compose -f docker-compose.hub.yml exec app \
+  npx tsx src/scripts/create-admin.ts \
+  --email predseda@bytovka.sk \
+  --name "J&aacute;n Nov&aacute;k"</code></pre>
         <p data-i18n="doc.admin.note">Pr&iacute;kaz vytla&ccaron;&iacute; do&ccaron;asn&eacute; heslo. Po prvom prihl&aacute;sen&iacute; si ho zme&ncaron; v nastaven&iacute;ach.</p>
 
         <h3 id="doc-owners" data-i18n="doc.owners.title">Pridanie vlastn&iacute;kov</h3>
@@ -913,7 +934,7 @@ const translations = {
     "hero.title": 'Správa bytovky<br /><em>pre ľudí,</em><br />nie pre právnikov',
     "hero.desc": "Elektronické hlasovanie, nástenka a správa vlastníkov pre slovenské bytové spoločenstvá. V súlade so zákonom č. 182/1993 Z.z. Zadarmo, bez predplatného, plne pod vašou kontrolou.",
     "hero.cta": "▶ Rýchly štart",
-    "terminal.comment1": "# Stiahni a spusti",
+    "terminal.comment1": "# Stiahni a spusti (bez git clone)",
     "terminal.comment2": "# Uprav .env – názov bytovky,<br># heslo k DB, email",
     "terminal.s1": "✔ Databáza pripravená",
     "terminal.s2": "✔ Migrácie hotové",
@@ -993,10 +1014,10 @@ const translations = {
     "doc.req.4": "SMTP prístup (pre emaily)",
     "doc.req.tip": "💡 Na lokálne testovanie stačí aj tvoj laptop – Docker Desktop na Windows alebo macOS.",
     "doc.install.title": "Inštalácia",
-    "doc.install.step1": "1. Stiahni repozitár",
+    "doc.install.step1": "1. Stiahni súbory",
     "doc.install.step2": "2. Vytvor konfiguračný súbor",
     "doc.install.step3": "3. Spusti Docker stack",
-    "doc.install.note": "Toto stiahne potrebné Docker images, vytvorí databázu a spustí app. Prvé spustenie trvá 1–2 minúty.",
+    "doc.install.note": "Toto stiahne Docker images z Docker Hub, vytvorí databázu a spustí app. Migrácie sa spustia automaticky. Prvé spustenie trvá 1–2 minúty.",
     "doc.env.title": "Konfigurácia .env",
     "doc.env.intro": 'Otvor súbor <code>.env</code> a uprav nasledovné hodnoty:',
     "doc.env.code": `# Názov tvojej bytovky (zobrazí sa v UI a emailoch)
@@ -1037,11 +1058,14 @@ EMAIL_FROM=noreply@mojabytovka.sk`,
     "doc.https.restart": "Po nastavení domény reštartuj stack:",
     "doc.backup.title": "Zálohovanie",
     "doc.backup.intro": 'Všetky dáta sú v PostgreSQL databáze a v priečinku <code>uploads/</code>. Odporúčame zálohovať denne.',
-    "doc.backup.manual": "Manuálna záloha databázy",
-    "doc.backup.cron": "Automatická záloha (cron)",
-    "doc.backup.tip": "💡 Zálohy ukladaj aj mimo servera – napríklad na Backblaze B2 alebo Hetzner Storage Box.",
+    "doc.backup.auto": "Automatická záloha",
+    "doc.backup.remote": "Vzdialená záloha (voliteľné)",
+    "doc.backup.remote.desc": "Pre zálohy mimo servera (ochrana aj pri kompromitovaní servera):",
+    "doc.backup.restore": "Obnova zo zálohy",
+    "doc.backup.tip": "💡 Vzdialené zálohy s append-only módom zaručia, že útočník nemôže zmazať zálohy ani s root prístupom na server.",
     "doc.update.title": "Aktualizácia na novú verziu",
-    "doc.update.desc": "Aktualizácia je jednoduchá – nové migrácie sa spustia automaticky počas buildu.",
+    "doc.update.desc": "Aktualizácia je jednoduchá – nové migrácie sa spustia automaticky pri štarte.",
+    "doc.update.note": "Toto stiahne najnovší Docker image a reštartuje app. Migrácie databázy sa spustia automaticky – žiadne manuálne kroky.",
     "doc.update.warn": "⚠️ Pred každou aktualizáciou urob zálohu databázy.",
     "doc.admin.title": "Admin účet",
     "doc.admin.desc": "Pri prvom spustení v produkcii vytvor admin účet cez príkazový riadok:",
@@ -1073,7 +1097,7 @@ EMAIL_FROM=noreply@mojabytovka.sk`,
     "hero.title": 'Apartment<br />management<br /><em>for people,</em> not lawyers',
     "hero.desc": "Electronic voting, bulletin board, and owner management for Slovak housing associations. Compliant with Slovak Act No. 182/1993. Free, no subscription, fully self-hosted.",
     "hero.cta": "▶ Quick start",
-    "terminal.comment1": "# Clone and run",
+    "terminal.comment1": "# Download and run (no git clone needed)",
     "terminal.comment2": "# Edit .env – building name,<br># DB password, email",
     "terminal.s1": "✔ Database ready",
     "terminal.s2": "✔ Migrations done",
@@ -1153,10 +1177,10 @@ EMAIL_FROM=noreply@mojabytovka.sk`,
     "doc.req.4": "SMTP access (for emails)",
     "doc.req.tip": "💡 For local testing, your laptop is enough – Docker Desktop on Windows or macOS.",
     "doc.install.title": "Installation",
-    "doc.install.step1": "1. Clone the repository",
+    "doc.install.step1": "1. Download the files",
     "doc.install.step2": "2. Create the configuration file",
     "doc.install.step3": "3. Start the Docker stack",
-    "doc.install.note": "This pulls the required Docker images, creates the database, and starts the app. First run takes 1–2 minutes.",
+    "doc.install.note": "This pulls Docker images from Docker Hub, creates the database, and starts the app. Migrations run automatically. First run takes 1–2 minutes.",
     "doc.env.title": ".env configuration",
     "doc.env.intro": 'Open the <code>.env</code> file and edit these values:',
     "doc.env.code": `# Your building name (shown in UI and emails)
@@ -1197,11 +1221,14 @@ EMAIL_FROM=noreply@mybuilding.com`,
     "doc.https.restart": "After setting up the domain, restart the stack:",
     "doc.backup.title": "Backups",
     "doc.backup.intro": 'All data is stored in the PostgreSQL database and the <code>uploads/</code> directory. We recommend daily backups.',
-    "doc.backup.manual": "Manual database backup",
-    "doc.backup.cron": "Automated backup (cron)",
-    "doc.backup.tip": "💡 Store backups off-server too – e.g., on Backblaze B2 or Hetzner Storage Box.",
+    "doc.backup.auto": "Automated backup",
+    "doc.backup.remote": "Remote backup (optional)",
+    "doc.backup.remote.desc": "For off-server backups (protection even if the server is compromised):",
+    "doc.backup.restore": "Restore from backup",
+    "doc.backup.tip": "💡 Remote backups with append-only mode ensure an attacker cannot delete backups even with root access to the server.",
     "doc.update.title": "Updating to a new version",
-    "doc.update.desc": "Updating is simple – new migrations run automatically during build.",
+    "doc.update.desc": "Updating is simple – new migrations run automatically on startup.",
+    "doc.update.note": "This pulls the latest Docker image and restarts the app. Database migrations run automatically – no manual steps needed.",
     "doc.update.warn": "⚠️ Always back up the database before updating.",
     "doc.admin.title": "Admin account",
     "doc.admin.desc": "On first production run, create an admin account via the command line:",
