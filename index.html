@@ -124,7 +124,34 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%235b8fff'/><text x='16' y='22' font-family='system-ui' font-size='18' font-weight='700' fill='white' text-anchor='middle'>R</text></svg>" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.1.0/dist/cookieconsent.css" />
   <style>
+    /* Cookie consent dark theme */
+    #cc-main {
+      --cc-bg: #141518;
+      --cc-primary-color: #e8e9ec;
+      --cc-secondary-color: #888a94;
+      --cc-btn-primary-bg: #5b8fff;
+      --cc-btn-primary-color: #fff;
+      --cc-btn-primary-hover-bg: #3d6fe8;
+      --cc-btn-primary-hover-color: #fff;
+      --cc-btn-secondary-bg: #1c1d21;
+      --cc-btn-secondary-color: #e8e9ec;
+      --cc-btn-secondary-hover-bg: #2a2b30;
+      --cc-btn-secondary-hover-color: #e8e9ec;
+      --cc-separator-border-color: #2a2b30;
+      --cc-cookie-category-block-bg: #1c1d21;
+      --cc-cookie-category-block-hover-bg: #2a2b30;
+      --cc-overlay-bg: rgba(14,15,17,0.7);
+      --cc-toggle-on-bg: #5b8fff;
+      --cc-section-border: #2a2b30;
+      --cc-font-family: 'DM Sans', sans-serif;
+    }
+    #cc-main .cm, #cc-main .pm {
+      border: 1px solid #2a2b30;
+      border-radius: 10px;
+    }
+
     :root {
       --bg:       #0e0f11;
       --bg2:      #141518;
@@ -1731,6 +1758,11 @@ function setLang(lang) {
       el.innerHTML = t[key];
     }
   });
+
+  // Update cookie banner language
+  if (typeof CookieConsent !== 'undefined' && CookieConsent.setLanguage) {
+    CookieConsent.setLanguage(lang);
+  }
 }
 
 // Apply saved language on load
@@ -1754,6 +1786,123 @@ const observer = new IntersectionObserver((entries) => {
 }, { rootMargin: '-20% 0px -70% 0px' });
 
 sections.forEach(s => observer.observe(s));
+</script>
+
+<!-- Google Analytics 4 — loaded only after cookie consent -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+</script>
+
+<!-- CookieConsent v3 -->
+<script defer src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.1.0/dist/cookieconsent.umd.js"></script>
+<script defer>
+  window.addEventListener('load', function() {
+    CookieConsent.run({
+      guiOptions: {
+        consentModal: {
+          layout: 'box inline',
+          position: 'bottom right'
+        }
+      },
+      categories: {
+        necessary: {
+          enabled: true,
+          readOnly: true
+        },
+        analytics: {
+          autoClear: {
+            cookies: [
+              { name: /^_ga/ },
+              { name: '_gid' }
+            ]
+          }
+        }
+      },
+      language: {
+        default: currentLang || 'sk',
+        translations: {
+          sk: {
+            consentModal: {
+              title: 'Používame cookies',
+              description: 'Používame analytické cookies (Google Analytics), aby sme pochopili, ako návštevníci používajú naše stránky. Žiadne osobné údaje nezdieľame s tretími stranami.',
+              acceptAllBtn: 'Prijať všetky',
+              acceptNecessaryBtn: 'Iba nevyhnutné',
+              showPreferencesBtn: 'Nastavenia'
+            },
+            preferencesModal: {
+              title: 'Nastavenia cookies',
+              acceptAllBtn: 'Prijať všetky',
+              acceptNecessaryBtn: 'Iba nevyhnutné',
+              savePreferencesBtn: 'Uložiť nastavenia',
+              sections: [
+                {
+                  title: 'Nevyhnutné cookies',
+                  description: 'Tieto cookies sú potrebné pre správne fungovanie stránky.',
+                  linkedCategory: 'necessary'
+                },
+                {
+                  title: 'Analytické cookies',
+                  description: 'Pomáhajú nám pochopiť, ako návštevníci používajú stránku, vďaka čomu ju môžeme zlepšovať.',
+                  linkedCategory: 'analytics'
+                }
+              ]
+            }
+          },
+          en: {
+            consentModal: {
+              title: 'We use cookies',
+              description: 'We use analytics cookies (Google Analytics) to understand how visitors use our site. We do not share any personal data with third parties.',
+              acceptAllBtn: 'Accept all',
+              acceptNecessaryBtn: 'Necessary only',
+              showPreferencesBtn: 'Preferences'
+            },
+            preferencesModal: {
+              title: 'Cookie preferences',
+              acceptAllBtn: 'Accept all',
+              acceptNecessaryBtn: 'Necessary only',
+              savePreferencesBtn: 'Save preferences',
+              sections: [
+                {
+                  title: 'Necessary cookies',
+                  description: 'These cookies are required for the website to function properly.',
+                  linkedCategory: 'necessary'
+                },
+                {
+                  title: 'Analytics cookies',
+                  description: 'Help us understand how visitors use the site so we can improve it.',
+                  linkedCategory: 'analytics'
+                }
+              ]
+            }
+          }
+        }
+      },
+      onConsent: function() {
+        if (CookieConsent.acceptedCategory('analytics')) {
+          loadGA4();
+        }
+      },
+      onChange: function() {
+        if (CookieConsent.acceptedCategory('analytics')) {
+          loadGA4();
+        }
+      }
+    });
+  });
+
+  function loadGA4() {
+    if (document.getElementById('ga4-script')) return;
+    var s = document.createElement('script');
+    s.id = 'ga4-script';
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-LC1KKVNZP1';
+    document.head.appendChild(s);
+    s.onload = function() {
+      gtag('js', new Date());
+      gtag('config', 'G-LC1KKVNZP1');
+    };
+  }
 </script>
 
 </body>
