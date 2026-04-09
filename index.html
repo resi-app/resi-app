@@ -4,16 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OpenResiApp – správa bytového spoločenstva</title>
-  <meta name="description" content="Open-source aplikácia na správu bytových spoločenstiev na Slovensku. Elektronické hlasovanie podľa zákona č. 182/1993 Z.z., nástenka, správa vlastníkov, PDF zápisnice. Zadarmo, self-hosted, Docker." />
-  <meta name="keywords" content="správa bytového domu, bytové spoločenstvo, elektronické hlasovanie, zákon 182/1993, SVB, open source, self-hosted, Docker, Slovensko" />
+  <meta name="description" content="Open-source aplikácia na správu bytových spoločenstiev na Slovensku. Elektronické hlasovanie podľa zákona č. 182/1993 Z.z., nástenka, správa vlastníkov, PDF zápisnice. Zadarmo self-hosted alebo managed cloud od 4 €/mes." />
+  <meta name="keywords" content="správa bytového domu, bytové spoločenstvo, elektronické hlasovanie, zákon 182/1993, SVB, open source, self-hosted, Docker, Slovensko, cloud hosting, SaaS" />
   <meta name="author" content="OpenResiApp" />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <link rel="canonical" href="https://open-resi.app" />
+  <link rel="alternate" hreflang="sk" href="https://open-resi.app" />
+  <link rel="alternate" hreflang="en" href="https://open-resi.app" />
+  <link rel="alternate" hreflang="x-default" href="https://open-resi.app" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="OpenResiApp – správa bytového spoločenstva" />
-  <meta property="og:description" content="Open-source aplikácia na správu bytových spoločenstiev na Slovensku. Elektronické hlasovanie, nástenka, správa vlastníkov. Zadarmo, self-hosted." />
+  <meta property="og:description" content="Open-source aplikácia na správu bytových spoločenstiev na Slovensku. Elektronické hlasovanie, nástenka, správa vlastníkov. Zadarmo self-hosted alebo managed cloud od 4 €/mes." />
   <meta property="og:url" content="https://open-resi.app" />
   <meta property="og:site_name" content="OpenResiApp" />
   <meta property="og:locale" content="sk_SK" />
@@ -22,7 +25,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="OpenResiApp – správa bytového spoločenstva" />
-  <meta name="twitter:description" content="Open-source aplikácia na správu bytových spoločenstiev na Slovensku. Elektronické hlasovanie podľa zákona č. 182/1993 Z.z." />
+  <meta name="twitter:description" content="Open-source aplikácia na správu bytových spoločenstiev na Slovensku. Elektronické hlasovanie podľa zákona č. 182/1993 Z.z. Self-hosted alebo managed cloud." />
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -32,16 +35,89 @@
     "name": "OpenResiApp",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Linux, Docker",
-    "description": "Open-source web application for managing residential apartment buildings in Slovakia. Electronic voting compliant with Slovak Act No. 182/1993.",
+    "description": "Open-source web application for managing residential apartment buildings in Slovakia. Electronic voting compliant with Slovak Act No. 182/1993. Available as free self-hosted or managed cloud from 4 EUR/month.",
     "url": "https://open-resi.app",
     "license": "https://opensource.org/licenses/MIT",
     "isAccessibleForFree": true,
     "inLanguage": ["sk", "en"],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
-    }
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Self-hosted (Free)",
+        "price": "0",
+        "priceCurrency": "EUR",
+        "description": "Free self-hosted version via Docker. Full features, your own server."
+      },
+      {
+        "@type": "Offer",
+        "name": "Managed Cloud",
+        "price": "4",
+        "priceCurrency": "EUR",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "4",
+          "priceCurrency": "EUR",
+          "unitText": "month",
+          "referenceQuantity": {
+            "@type": "QuantitativeValue",
+            "value": "1",
+            "unitText": "instance"
+          }
+        },
+        "description": "Managed cloud hosting starting from 4 EUR per instance per month. No server setup, automatic backups, SSL included.",
+        "url": "https://cloud.open-resi.app",
+        "availability": "https://schema.org/InStock"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is OpenResiApp?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OpenResiApp is an open-source web application for managing Slovak housing associations (bytove spolocenstva). It includes electronic voting compliant with Slovak Act No. 182/1993, a bulletin board, owner management, PDF minutes generation, and mandate delegation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is OpenResiApp free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, OpenResiApp is free and open-source under the MIT license. You can self-host it using Docker on your own server at no cost. Alternatively, if you don't want to manage a server, a managed cloud version is available starting from 4 EUR per instance per month at cloud.open-resi.app."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does OpenResiApp comply with Slovak law?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The voting module is designed according to Slovak Act No. 182/1993 on Ownership of Apartments. It supports three voting methods (by ownership share, by flat, by area), three quorum types, written voting (per rollam), mandates with certified signatures, and produces audited PDF minutes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between self-hosted and cloud version?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The self-hosted version is free — you install it on your own server using Docker. The cloud version at cloud.open-resi.app is a managed service where we handle the server, backups, SSL, and updates for you. Both versions have the same features. The cloud version starts with a free 7-day trial."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does OpenResiApp Cloud cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "OpenResiApp Cloud uses per-instance pricing with volume discounts: 1 instance costs 7 EUR/month, 2-3 instances cost 6 EUR each, 4-5 instances cost 5 EUR each, and 6+ instances cost 4 EUR each. A free 7-day trial is available with no credit card required."
+        }
+      }
+    ]
   }
   </script>
 
@@ -513,6 +589,68 @@
       h1 { font-size: 2rem; }
     }
 
+    /* ─── CLOUD ─── */
+    .cloud-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .cloud-benefit {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: left;
+    }
+    .cloud-benefit:hover { background: var(--bg3); }
+    .cloud-icon {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .cloud-benefit h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .cloud-benefit p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+    .cloud-pricing {
+      max-width: 420px;
+      margin: 2.5rem auto 0;
+    }
+    .cloud-pricing table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+    .cloud-pricing thead tr {
+      border-bottom: 2px solid var(--border);
+    }
+    .cloud-pricing th {
+      padding: 0.6rem 1rem;
+      color: var(--muted);
+      font-weight: 500;
+      text-align: left;
+    }
+    .cloud-pricing td {
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .cloud-pricing td:last-child {
+      color: var(--accent);
+      font-family: 'DM Mono', monospace;
+      font-weight: 500;
+    }
+    .cloud-trial-note {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 0.75rem;
+    }
+    @media (max-width: 900px) {
+      .cloud-grid { grid-template-columns: 1fr; }
+    }
+
     /* subtle grid background */
     .hero-section {
       background-image:
@@ -536,6 +674,7 @@
         <li><a href="#roly" data-i18n="nav.roles">Roly</a></li>
         <li><a href="#law" data-i18n="nav.law">&sect; Z&aacute;kon</a></li>
         <li><a href="#tech" data-i18n="nav.tech">Tech stack</a></li>
+        <li><a href="#cloud" data-i18n="nav.cloud">Cloud</a></li>
         <li><a href="#docs" data-i18n="nav.docs">Docs</a></li>
         <li><a href="#community" data-i18n="nav.community">Komunita</a></li>
         <li><a href="https://hub.docker.com/r/ipk0/open-resiapp">Docker Hub</a></li>
@@ -555,7 +694,7 @@
   <div>
     <div class="badge">
       <span class="badge-dot"></span>
-      Open Source &middot; Self-hosted &middot; <a href="https://hub.docker.com/r/ipk0/open-resiapp" style="color: inherit; text-decoration: underline;">Docker Hub</a> &middot; <span data-i18n="badge.law">&sect; 182/1993 Z.z.</span>
+      Open Source &middot; Self-hosted &middot; <a href="https://cloud.open-resi.app" style="color: inherit; text-decoration: underline;">Cloud</a> &middot; <a href="https://hub.docker.com/r/ipk0/open-resiapp" style="color: inherit; text-decoration: underline;">Docker Hub</a> &middot; <span data-i18n="badge.law">&sect; 182/1993 Z.z.</span>
     </div>
     <h1 data-i18n="hero.title">Spr&aacute;va bytovky<br /><em>pre &#318;ud&iacute;,</em><br />nie pre pr&aacute;vnikov</h1>
     <p class="hero-desc" data-i18n="hero.desc">
@@ -565,6 +704,9 @@
     <div class="hero-actions">
       <a href="#docs" class="btn btn-primary" data-i18n="hero.cta">
         &#9654; R&yacute;chly &scaron;tart
+      </a>
+      <a href="https://cloud.open-resi.app" class="btn btn-ghost" data-i18n="hero.cloud" style="border-color: var(--accent); color: var(--accent);">
+        &#9729; Vysk&uacute;&scaron;a&#357; cloud
       </a>
       <a href="https://github.com/open-resiapp/open-resiapp" class="btn btn-ghost">
         &starf; GitHub
@@ -816,6 +958,57 @@
       <div class="tech-item">Nodemailer <span>Email</span></div>
       <div class="tech-item">next-intl <span>i18n</span></div>
       <div class="tech-item">react-pdf <span>PDF export</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOUD -->
+<section id="cloud" style="background: linear-gradient(180deg, var(--bg) 0%, rgba(91,143,255,0.04) 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="section-inner" style="text-align: center;">
+    <div class="section-label" data-i18n="cloud.label">// cloud</div>
+    <h2 data-i18n="cloud.title">Nechcete sa stara&#357; o server?</h2>
+    <p class="section-desc" style="margin-left: auto; margin-right: auto;" data-i18n="cloud.desc">Spust&iacute;me to za v&aacute;s. Rovnak&aacute; aplik&aacute;cia, &zcaron;iadna &uacute;dr&zcaron;ba. 7 dn&iacute; zadarmo.</p>
+
+    <div class="cloud-grid">
+      <div class="cloud-benefit">
+        <div class="cloud-icon">&#x26A1;</div>
+        <h3 data-i18n="cloud.b1.title">Spusten&eacute; za 5 min&uacute;t</h3>
+        <p data-i18n="cloud.b1.desc">&Zcaron;iadny server, &zcaron;iadny Docker, &zcaron;iadna konfigur&aacute;cia. Zaregistrujte sa a va&scaron;a in&scaron;tancia be&zcaron;&iacute;.</p>
+      </div>
+      <div class="cloud-benefit">
+        <div class="cloud-icon">&#x1F512;</div>
+        <h3 data-i18n="cloud.b2.title">Z&aacute;lohy a bezpe&ccaron;nos&#357;</h3>
+        <p data-i18n="cloud.b2.desc">Automatick&eacute; denn&eacute; z&aacute;lohy, SSL, izol&aacute;cia d&aacute;t. Ka&zcaron;d&aacute; in&scaron;tancia be&zcaron;&iacute; v samostatnom kontajneri.</p>
+      </div>
+      <div class="cloud-benefit">
+        <div class="cloud-icon">&#x1F4B6;</div>
+        <h3 data-i18n="cloud.b3.title">Od 4 &euro;/mesiac</h3>
+        <p data-i18n="cloud.b3.desc">Plat&iacute;te len za akt&iacute;vne in&scaron;tancie. &Ccaron;&iacute;m viac in&scaron;tanci&iacute;, t&yacute;m ni&zcaron;&scaron;ia cena za jednu.</p>
+      </div>
+    </div>
+
+    <div class="cloud-pricing">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="cloud.table.count">Po&ccaron;et in&scaron;tanci&iacute;</th>
+            <th data-i18n="cloud.table.price">Cena za in&scaron;tanciu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>7 &euro;/mes.</td></tr>
+          <tr><td>2&ndash;3</td><td>6 &euro;/mes.</td></tr>
+          <tr><td>4&ndash;5</td><td>5 &euro;/mes.</td></tr>
+          <tr><td>6+</td><td>4 &euro;/mes.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top: 2.5rem;">
+      <a href="https://cloud.open-resi.app" class="btn btn-primary" style="font-size: 1.05rem; padding: 14px 32px;" data-i18n="cloud.cta">
+        Vysk&uacute;&scaron;ajte 7 dn&iacute; zadarmo &rarr;
+      </a>
+      <p class="cloud-trial-note" data-i18n="cloud.note">Bez kreditnej karty. Pln&eacute; funkcie po&ccaron;as sk&uacute;&scaron;obn&eacute;ho obdobia.</p>
     </div>
   </div>
 </section>
@@ -1098,6 +1291,7 @@ docker compose up -d</code></pre>
   <p>
     <strong>OpenResiApp</strong> &ndash; open source <span data-i18n="footer.license">pod licenciou</span> MIT &middot;
     <a href="https://github.com/open-resiapp/open-resiapp">GitHub</a> &middot;
+    <a href="https://cloud.open-resi.app" data-i18n="footer.cloud">Cloud</a> &middot;
     <a href="https://github.com/open-resiapp/open-resiapp/discussions" data-i18n="footer.discussions">Diskusie</a> &middot;
     <span data-i18n="footer.made">Vytvoren&eacute; pre slovensk&eacute; bytov&eacute; spolo&ccaron;enstv&aacute;</span>
   </p>
@@ -1287,6 +1481,22 @@ NEXTAUTH_SECRET=changeMe_anotherRandomString456
     "community.contrib.title": "Príspevky",
     "community.contrib.desc": "Bug fixy, nové funkcie, preklady, dokumentácia – každý príspevok pomáha.",
     "community.lang": "Komunikujeme po slovensky aj po anglicky. Použite čokoľvek vám vyhovuje.",
+    "nav.cloud": "Cloud",
+    "cloud.label": "// cloud",
+    "cloud.title": "Nechcete sa starať o server?",
+    "cloud.desc": "Spustíme to za vás. Rovnaká aplikácia, žiadna údržba. 7 dní zadarmo.",
+    "cloud.b1.title": "Spustené za 5 minút",
+    "cloud.b1.desc": "Žiadny server, žiadny Docker, žiadna konfigurácia. Zaregistrujte sa a vaša inštancia beží.",
+    "cloud.b2.title": "Zálohy a bezpečnosť",
+    "cloud.b2.desc": "Automatické denné zálohy, SSL, izolácia dát. Každá inštancia beží v samostatnom kontajneri.",
+    "cloud.b3.title": "Od 4 €/mesiac",
+    "cloud.b3.desc": "Platíte len za aktívne inštancie. Čím viac inštancií, tým nižšia cena za jednu.",
+    "cloud.table.count": "Počet inštancií",
+    "cloud.table.price": "Cena za inštanciu",
+    "cloud.cta": "Vyskúšajte 7 dní zadarmo →",
+    "cloud.note": "Bez kreditnej karty. Plné funkcie počas skúšobného obdobia.",
+    "hero.cloud": "☁ Vyskúšať cloud",
+    "footer.cloud": "Cloud",
     "footer.discussions": "Diskusie",
     "footer.license": "pod licenciou",
     "footer.made": "Vytvorené pre slovenské bytové spoločenstvá",
@@ -1462,6 +1672,22 @@ NEXTAUTH_SECRET=changeMe_anotherRandomString456
     "doc.voting.3": "Optionally assign a vote counter for paper ballots",
     "doc.voting.4": "Click <strong>Start Vote</strong>",
     "doc.voting.note": "All owners receive an email with a link. Results are visible in real time. After the vote ends, you can generate a PDF minutes document.",
+    "nav.cloud": "Cloud",
+    "cloud.label": "// cloud",
+    "cloud.title": "Don't want to manage a server?",
+    "cloud.desc": "We'll run it for you. Same app, zero maintenance. 7 days free.",
+    "cloud.b1.title": "Running in 5 minutes",
+    "cloud.b1.desc": "No server, no Docker, no configuration. Sign up and your instance is live.",
+    "cloud.b2.title": "Backups & security",
+    "cloud.b2.desc": "Automatic daily backups, SSL, data isolation. Each instance runs in its own container.",
+    "cloud.b3.title": "From 4 EUR/month",
+    "cloud.b3.desc": "Pay only for active instances. The more instances, the lower the price per instance.",
+    "cloud.table.count": "Number of instances",
+    "cloud.table.price": "Price per instance",
+    "cloud.cta": "Try 7 days free →",
+    "cloud.note": "No credit card required. Full features during trial.",
+    "hero.cloud": "☁ Try the cloud",
+    "footer.cloud": "Cloud",
     "nav.community": "Community",
     "community.label": "// community",
     "community.title": "Join the community",
@@ -1473,6 +1699,7 @@ NEXTAUTH_SECRET=changeMe_anotherRandomString456
     "community.contrib.title": "Contribute",
     "community.contrib.desc": "Bug fixes, new features, translations, documentation – every contribution helps.",
     "community.lang": "We communicate in both Slovak and English. Use whichever you're comfortable with.",
+    "footer.cloud": "Cloud",
     "footer.discussions": "Discussions",
     "footer.license": "licensed under",
     "footer.made": "Built for Slovak housing associations",
